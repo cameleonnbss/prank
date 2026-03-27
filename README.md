@@ -1,2 +1,2 @@
 # prank
-batch file
+.bat
