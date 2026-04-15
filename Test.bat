@@ -3,7 +3,7 @@ color 0A
 title Hack en cours...
 
 for /l %%i in (1,1,30) do (
-    start cmd /k "color 0A && echo Vous avez été hacké && title Terminal %%i"
+    start cmd /k "color 0A && echo Vous avez ete hacke && title Terminal %%i"
     timeout /t 1 /nobreak >nul
 )
 
