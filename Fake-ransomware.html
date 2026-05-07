@@ -1,601 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRITICAL_SYSTEM_FAILURE_ID_8829</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAMS // SYSTEM ENCRYPTED</title>
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #fff;
-            font-family: 'VT323', monospace;
-            height: 100%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
 
-        /* Effet CRT/Scanlines */
-        .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-            background-size: 100% 3px, 3px 100%;
-            pointer-events: none;
-            z-index: 10;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .container {
-            width: 90%;
-            max-width: 900px;
-            border: 1px solid #333;
-            padding: 40px;
-            background: rgba(5, 5, 5, 0.95);
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
-            text-align: center;
-            position: relative;
-        }
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    font-family: 'Share Tech Mono', monospace;
+}
 
-        .mask {
-            width: 150px;
-            filter: brightness(0.9) contrast(1.2);
-            margin-bottom: 20px;
-            animation: flicker 0.2s infinite alternate;
-        }
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
 
-        @keyframes flicker {
-            0% { opacity: 0.95; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.01); }
-        }
+/* CRT EFFECT */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(rgba(255,255,255,0.03) 50%, rgba(0,0,0,0.2) 50%),
+        linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+    z-index: 50;
+}
 
-        h1 {
-            font-size: 3rem;
-            color: #fff;
-            margin: 10px 0;
-            letter-spacing: 5px;
-            border-bottom: 1px solid #222;
-            padding-bottom: 20px;
-        }
+.container {
+    width: 92%;
+    max-width: 1150px;
+    height: 90vh;
+    background: rgba(8,8,8,0.96);
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 0 40px rgba(255,255,255,0.06);
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    overflow: hidden;
+    position: relative;
+}
 
-        .warning-text {
-            color: #fff;
-            font-size: 1.4rem;
-            margin: 25px 0;
-            line-height: 1.4;
-            text-align: justify;
-        }
+.sidebar {
+    border-right: 1px solid #1d1d1d;
+    background: linear-gradient(to bottom, #050505, #0d0d0d);
+    padding: 30px;
+}
 
-        .terminal {
-            background: #000;
-            border: 1px solid #222;
-            height: 150px;
-            margin: 20px 0;
-            padding: 15px;
-            text-align: left;
-            overflow: hidden;
-            font-size: 1.1rem;
-            color: #888;
-        }
+.logo {
+    width: 180px;
+    display: block;
+    margin: auto;
+    filter: grayscale(1) brightness(1.1) contrast(1.1);
+    animation: flicker 0.15s infinite alternate;
+}
 
-        .timer-box {
-            background: #111;
-            padding: 20px;
-            border: 1px solid #333;
-            display: inline-block;
-            margin: 20px 0;
-        }
+@keyframes flicker {
+    from { opacity: 0.92; }
+    to { opacity: 1; }
+}
 
-        .timer-label { font-size: 1rem; color: #555; margin-bottom: 10px; }
-        
-        #timer {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #fff;
-            letter-spacing: 4px;
-        }
+.brand {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 42px;
+    letter-spacing: 10px;
+    font-family: 'VT323', monospace;
+}
 
-        .payment-info {
-            font-size: 0.9rem;
-            color: #444;
-            margin-top: 30px;
-            border-top: 1px solid #222;
-            padding-top: 20px;
-        }
+.brand-sub {
+    text-align: center;
+    color: #666;
+    margin-top: 5px;
+    font-size: 12px;
+    letter-spacing: 3px;
+}
 
-        .btc-address {
-            color: #888;
-            background: #0a0a0a;
-            padding: 10px;
-            display: block;
-            margin-top: 10px;
-            border: 1px dashed #333;
-            font-family: monospace;
-        }
+.status-box {
+    margin-top: 40px;
+    border: 1px solid #1f1f1f;
+    padding: 18px;
+    background: #090909;
+}
 
-        .footer {
-            margin-top: 40px;
-            font-size: 1.2rem;
-            letter-spacing: 15px;
-            color: #222;
-        }
-    </style>
+.status-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    margin-top: 5px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+.main {
+    padding: 40px;
+    position: relative;
+}
+
+.warning-title {
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: 4px;
+    font-family: 'VT323', monospace;
+}
+
+.warning-sub {
+    color: #777;
+    margin-top: 15px;
+    max-width: 700px;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.timer-box {
+    margin-top: 35px;
+    background: #0d0d0d;
+    border: 1px solid #1d1d1d;
+    padding: 25px;
+}
+
+.timer-label {
+    color: #666;
+    letter-spacing: 3px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+#timer {
+    font-size: 76px;
+    font-family: 'VT323', monospace;
+    letter-spacing: 6px;
+}
+
+.terminal {
+    margin-top: 30px;
+    background: #050505;
+    border: 1px solid #1f1f1f;
+    height: 300px;
+    overflow: hidden;
+    padding: 18px;
+    position: relative;
+}
+
+.terminal-header {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.line {
+    font-size: 14px;
+    color: #cfcfcf;
+    margin-bottom: 6px;
+    opacity: 0;
+    animation: fadeIn 0.4s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.payment-box {
+    margin-top: 30px;
+    border: 1px dashed #333;
+    padding: 20px;
+    background: #090909;
+}
+
+.payment-title {
+    color: #888;
+    margin-bottom: 10px;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.btc {
+    font-size: 16px;
+    word-break: break-all;
+    color: #fff;
+}
+
+.footer {
+    position: absolute;
+    bottom: 25px;
+    right: 40px;
+    color: #444;
+    letter-spacing: 10px;
+    font-size: 14px;
+}
+
+.glitch {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.03;
+    background: repeating-linear-gradient(
+        0deg,
+        #fff,
+        #fff 1px,
+        transparent 1px,
+        transparent 3px
+    );
+}
+
+</style>
 </head>
 <body>
-    <div class="overlay"></div>
 
-    <div class="container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Fsociety_logo.svg/1024px-Fsociety_logo.svg.png" class="mask" alt="FSOCIETY">
-        
-        <h1>SYSTEM ENCRYPTED</h1>
+<div class="glitch"></div>
 
-        <div class="warning-text">
-            All your files have been encrypted with military-grade RSA-4096. You have 24 hours to provide the payment before the private key is permanently deleted from our servers. Any attempt to modify system files will result in immediate data corruption.
+<div class="container">
+
+    <div class="sidebar">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Fsociety_logo.svg/1024px-Fsociety_logo.svg.png">
+
+        <div class="brand">CAMS</div>
+        <div class="brand-sub">ENCRYPTION DIVISION</div>
+
+        <div class="status-box">
+            <div class="status-line">
+                <span>NETWORK ACCESS</span>
+                <div class="status-dot"></div>
+            </div>
+
+            <div class="status-line">
+                <span>FILE ACCESS</span>
+                <div class="status-dot"></div>
+            </div>
+
+            <div class="status-line">
+                <span>BACKUP CONTROL</span>
+                <div class="status-dot"></div>
+            </div>
+
+            <div class="status-line">
+                <span>REMOTE SESSION</span>
+                <div class="status-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+
+        <div class="warning-title">
+            YOUR FILES<br>
+            HAVE BEEN ENCRYPTED
+        </div>
+
+        <div class="warning-sub">
+            Your important documents, databases, media and backups are currently inaccessible. Attempts to restart the system or modify encrypted files may result in permanent corruption.
+        </div>
+
+        <div class="timer-box">
+            <div class="timer-label">PRIVATE KEY DESTRUCTION COUNTDOWN</div>
+            <div id="timer">24:00:00</div>
         </div>
 
         <div class="terminal" id="terminal">
-            </div>
-
-        <div class="timer-box">
-            <div class="timer-label">PRIVATE KEY DESTRUCTION IN:</div>
-            <div id="timer">24:00:00</div>
+            <div class="terminal-header">LIVE ENCRYPTION LOG</div>
         </div>
 
-        <div class="payment-info">
-            SEND 0.124 BTC TO THE FOLLOWING ADDRESS:
-            <span class="btc-address">bc1qcamzzzprankaddr6k9shm42v8z9k0lptsnqxyz</span>
+        <div class="payment-box">
+            <div class="payment-title">SEND PAYMENT TO RECOVER ACCESS</div>
+            <div class="btc">bc1qcamzzz8f4a7x2n3c0d9r6v5w2y8m1kq4lpr</div>
         </div>
 
-        <div class="footer">HACKED BY CAMZZZ</div>
+        <div class="footer">SIGNED BY CAMS</div>
+
     </div>
 
-    <script>
-        // Simulation du terminal de fichiers
-        const files = [
-            "C:/Users/Admin/Documents/passwords.db... [LOCKED]",
-            "C:/Users/Admin/Pictures/Personal/backup.zip... [LOCKED]",
-            "C:/Windows/System32/drivers/etc/hosts... [MODIFIED]",
-            "D:/Projects/Source/index.php... [ENCRYPTED]",
-            "C:/Users/Admin/AppData/Roaming/Discord/tokens... [EXTRACTED]",
-            "C:/Users/Admin/Work/Budget_2026.xlsx... [LOCKED]",
-            "D:/Photos/Backup_Full.iso... [ENCRYPTED]"
-        ];
+</div>
 
-        const term = document.getElementById('terminal');
-        
-        function scrollTerminal() {
-            const line = document.createElement('div');
-            line.textContent = ">> " + files[Math.floor(Math.random() * files.length)];
-            term.appendChild(line);
-            if (term.childNodes.length > 8) term.removeChild(term.firstChild);
-        }
-        setInterval(scrollTerminal, 300);
+<script>
+const terminal = document.getElementById('terminal');
 
-        // Timer 24h
-        let seconds = 24 * 60 * 60;
-        const timerEl = document.getElementById('timer');
+const files = [
+    'C:/Users/Admin/Documents/Tax_Return_2025.pdf',
+    'C:/Users/Admin/Desktop/Passwords.txt',
+    'C:/Users/Admin/Pictures/Private_Backup.zip',
+    'C:/Windows/System32/drivers/etc/hosts',
+    'D:/Projects/Source/database.sql',
+    'C:/Users/Admin/AppData/Roaming/Wallet/wallet.dat',
+    'C:/Users/Admin/Documents/Contracts/final.docx',
+    'D:/Media/Family/video_archive.mp4',
+    'C:/Users/Admin/Work/Budget_2026.xlsx',
+    'C:/Users/Admin/Cloud/backup.iso'
+];
 
-        function updateTimer() {
-            const h = Math.floor(seconds / 3600);
-            const m = Math.floor((seconds % 3600) / 60);
-            const s = seconds % 60;
-            timerEl.textContent = 
-                `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            if (seconds > 0) seconds--;
-        }
-        setInterval(updateTimer, 1000);
-    </script>
-</body>
-</html>
-            width: 850px;
-            border: 1px solid #333;
-            background: #0a0a0a;
-            padding: 20px;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
-            position: relative;
-            z-index: 5;
-        }
+function addLine() {
+    const div = document.createElement('div');
+    div.className = 'line';
 
-        .header {
-            text-align: center;
-            border-bottom: 1px solid #333;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
+    const file = files[Math.floor(Math.random() * files.length)];
 
-        /* On utilise l'image du masque envoyée */
-        .fsociety-logo {
-            width: 120px;
-            filter: drop-shadow(0 0 5px #fff);
-            margin-bottom: 10px;
-        }
+    div.textContent = '[ENCRYPTED] ' + file;
 
-        .warning-title {
-            color: #ff0000;
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            animation: blink 1s infinite;
-        }
+    terminal.appendChild(div);
 
-        @keyframes blink {
-            0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; }
-        }
+    if (terminal.children.length > 18) {
+        terminal.removeChild(terminal.children[1]);
+    }
 
-        .content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+    terminal.scrollTop = terminal.scrollHeight;
+}
 
-        .info-panel {
-            text-align: left;
-            font-size: 14px;
-            line-height: 1.4;
-        }
+setInterval(addLine, 180);
 
-        .info-panel h3 {
-            color: #fff;
-            border-bottom: 1px solid #444;
-            padding-bottom: 5px;
-            margin-top: 0;
-        }
+let seconds = 24 * 60 * 60;
+const timer = document.getElementById('timer');
 
-        /* Le terminal avec les fichiers qui défilent */
-        .terminal {
-            background: #000;
-            border: 1px solid #222;
-            height: 180px;
-            padding: 10px;
-            font-size: 12px;
-            color: #0f0; /* Vert matrice classique */
-            overflow: hidden;
-            position: relative;
-        }
+function updateTimer() {
+    let h = Math.floor(seconds / 3600);
+    let m = Math.floor((seconds % 3600) / 60);
+    let s = seconds % 60;
 
-        .terminal-line {
-            margin-bottom: 2px;
-            white-space: nowrap;
-        }
+    timer.textContent =
+        `${h.toString().padStart(2,'0')}:` +
+        `${m.toString().padStart(2,'0')}:` +
+        `${s.toString().padStart(2,'0')}`;
 
-        .timer-section {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            background: #111;
-            border: 1px solid #222;
-        }
+    if(seconds > 0) seconds--;
+}
 
-        .timer {
-            font-size: 48px;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
+setInterval(updateTimer, 1000);
+updateTimer();
 
-        .address-box {
-            background: #1a1a1a;
-            padding: 10px;
-            margin-top: 15px;
-            font-size:
-        .mask-container {
-            width: 250px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px #ffffff44);
-            animation: flicker 0.1s infinite alternate;
-        }
+setInterval(() => {
+    document.body.style.filter = 'brightness(1.05)';
 
-        @keyframes flicker {
-            0% { opacity: 0.9; }
-            100% { opacity: 1; transform: skew(0.5deg); }
-        }
+    setTimeout(() => {
+        document.body.style.filter = 'brightness(1)';
+    }, 60);
+}, 4000);
 
-        h1 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin: 10px 0;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
+</script>
 
-        .warning-box {
-            border: 2px solid #fff;
-            padding: 20px;
-            max-width: 800px;
-            background: rgba(20, 20, 20, 0.8);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-
-        .status-header {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #fff;
-            padding-bottom: 10px;
-        }
-
-        .file-scroller {
-            height: 120px;
-            overflow: hidden;
-            font-family: 'VT323', monospace;
-            font-size: 1.2rem;
-            color: #aaa;
-            text-align: left;
-            margin: 15px 0;
-            border: 1px solid #333;
-            padding: 5px;
-            background: #050505;
-        }
-
-        .file-line {
-            line-height: 1.2;
-            animation: slideUp 8s linear infinite;
-        }
-
-        @keyframes slideUp {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100%); }
-        }
-
-        .timer-container {
-            margin: 20px 0;
-        }
-
-        #timer {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #fff;
-            background: #1a1a1a;
-            padding: 10px 30px;
-            border-radius: 5px;
-            display: inline-block;
-        }
-
-        .address-box {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        .btc-address {
-            color: #fff;
-            font-weight: bold;
-            background: #222;
-            padding: 8px;
-            margin-top: 5px;
-            display: block;
-            border: 1px dashed #555;
-        }
-
-        .signature {
-            margin-top: 30px;
-            font-size: 1.2rem;
-            letter-spacing: 10px;
-            color: #fff;
-            font-weight: bold;
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="mask-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Fsociety_logo.svg/1024px-Fsociety_logo.svg.png" alt="F-Society" width="100%">
-    </div>
-
-    <div class="warning-box">
-        <div class="status-header">⚠️ YOUR FILES HAVE BEEN ENCRYPTED ⚠️</div>
-        
-        <p>All your documents, photos, databases and other important files have been encrypted using military-grade RSA-4096 algorithm. Do NOT try to restart your PC or close this window, as it will lead to permanent data loss.</p>
-
-        <div class="file-scroller">
-            <div class="file-line" id="fileList">
-                </div>
-        </div>
-
-        <div class="timer-container">
-            <div>TIME REMAINING UNTIL PRIVATE KEY DESTRUCTION:</div>
-            <div id="timer">24:00:00</div>
-        </div>
-
-        <div class="address-box">
-            Send 0.124 BTC to the following address to receive your decryption key:
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRITICAL_SYSTEM_FAILURE_ID_8829</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #fff;
-            font-family: 'VT323', monospace;
-            height: 100%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Effet CRT/Scanlines */
-        .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-            background-size: 100% 3px, 3px 100%;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 900px;
-            border: 1px solid #333;
-            padding: 40px;
-            background: rgba(5, 5, 5, 0.95);
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
-            text-align: center;
-            position: relative;
-        }
-
-        .mask {
-            width: 150px;
-            filter: brightness(0.9) contrast(1.2);
-            margin-bottom: 20px;
-            animation: flicker 0.2s infinite alternate;
-        }
-
-        @keyframes flicker {
-            0% { opacity: 0.95; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.01); }
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: #fff;
-            margin: 10px 0;
-            letter-spacing: 5px;
-            border-bottom: 1px solid #222;
-            padding-bottom: 20px;
-        }
-
-        .warning-text {
-            color: #fff;
-            font-size: 1.4rem;
-            margin: 25px 0;
-            line-height: 1.4;
-            text-align: justify;
-        }
-
-        .terminal {
-            background: #000;
-            border: 1px solid #222;
-            height: 150px;
-            margin: 20px 0;
-            padding: 15px;
-            text-align: left;
-            overflow: hidden;
-            font-size: 1.1rem;
-            color: #888;
-        }
-
-        .timer-box {
-            background: #111;
-            padding: 20px;
-            border: 1px solid #333;
-            display: inline-block;
-            margin: 20px 0;
-        }
-
-        .timer-label { font-size: 1rem; color: #555; margin-bottom: 10px; }
-        
-        #timer {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #fff;
-            letter-spacing: 4px;
-        }
-
-        .payment-info {
-            font-size: 0.9rem;
-            color: #444;
-            margin-top: 30px;
-            border-top: 1px solid #222;
-            padding-top: 20px;
-        }
-
-        .btc-address {
-            color: #888;
-            background: #0a0a0a;
-            padding: 10px;
-            display: block;
-            margin-top: 10px;
-            border: 1px dashed #333;
-            font-family: monospace;
-        }
-
-        .footer {
-            margin-top: 40px;
-            font-size: 1.2rem;
-            letter-spacing: 15px;
-            color: #222;
-        }
-    </style>
-</head>
-<body>
-    <div class="overlay"></div>
-
-    <div class="container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Fsociety_logo.svg/1024px-Fsociety_logo.svg.png" class="mask" alt="FSOCIETY">
-        
-        <h1>SYSTEM ENCRYPTED</h1>
-
-        <div class="warning-text">
-            All your files have been encrypted with military-grade RSA-4096. You have 24 hours to provide the payment before the private key is permanently deleted from our servers. Any attempt to modify system files will result in immediate data corruption.
-        </div>
-
-        <div class="terminal" id="terminal">
-            </div>
-
-        <div class="timer-box">
-            <div class="timer-label">PRIVATE KEY DESTRUCTION IN:</div>
-            <div id="timer">24:00:00</div>
-        </div>
-
-        <div class="payment-info">
-            SEND 0.124 BTC TO THE FOLLOWING ADDRESS:
-            <span class="btc-address">bc1qcamzzzprankaddr6k9shm42v8z9k0lptsnqxyz</span>
-        </div>
-
-        <div class="footer">HACKED BY CAMZZZ</div>
-    </div>
-
-    <script>
-        // Simulation du terminal de fichiers
-        const files = [
-            "C:/Users/Admin/Documents/passwords.db... [LOCKED]",
-            "C:/Users/Admin/Pictures/Personal/backup.zip... [LOCKED]",
-            "C:/Windows/System32/drivers/etc/hosts... [MODIFIED]",
-            "D:/Projects/Source/index.php... [ENCRYPTED]",
-            "C:/Users/Admin/AppData/Roaming/Discord/tokens... [EXTRACTED]",
-            "C:/Users/Admin/Work/Budget_2026.xlsx... [LOCKED]",
-            "D:/Photos/Backup_Full.iso... [ENCRYPTED]"
-        ];
-
-        const term = document.getElementById('terminal');
-        
-        function scrollTerminal() {
-            const line = document.createElement('div');
-            line.textContent = ">> " + files[Math.floor(Math.random() * files.length)];
-            term.appendChild(line);
-            if (term.childNodes.length > 8) term.removeChild(term.firstChild);
-        }
-        setInterval(scrollTerminal, 300);
-
-        // Timer 24h
-        let seconds = 24 * 60 * 60;
-        const timerEl = document.getElementById('timer');
-
-        function updateTimer() {
-            const h = Math.floor(seconds / 3600);
-            const m = Math.floor((seconds % 3600) / 60);
-            const s = seconds % 60;
-            timerEl.textContent = 
-                `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            if (seconds > 0) seconds--;
-        }
-        setInterval(updateTimer, 1000);
-    </script>
 </body>
 </html>
