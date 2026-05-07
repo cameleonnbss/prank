@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚠️ YOUR FILES HAVE BEEN ENCRYPTED ⚠️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #0f0;
+            font-family: 'VT323', monospace;
+            overflow: hidden;
+            text-align: center;
+        }
+        .header {
+            background: #300;
+            padding: 20px;
+            border-bottom: 4px solid #f00;
+        }
+        .skull {
+            font-size: 120px;
+            animation: glitch 1s infinite;
+        }
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 #f00, -2px 0 #0f0; }
+            50% { text-shadow: -2px 0 #f00, 2px 0 #0f0; }
+            100% { text-shadow: 2px 0 #f00, -2px 0 #0f0; }
+        }
+        h1 { color: #f00; font-size: 3em; margin: 10px; text-shadow: 0 0 10px #f00; }
+        .fsociety {
+            font-size: 4em;
+            color: #00f;
+            text-shadow: 0 0 20px #00f;
+            margin: 20px;
+            animation: fs 2s infinite alternate;
+        }
+        @keyframes fs { from { transform: scale(1); } to { transform: scale(1.05); } }
+        .files {
+            height: 200px;
+            overflow: hidden;
+            background: #111;
+            border: 3px solid #f00;
+            margin: 20px auto;
+            width: 90%;
+            position: relative;
+        }
+        .scroll {
+            position: absolute;
+            white-space: nowrap;
+            animation: scroll 15s linear infinite;
+            font-size: 1.4em;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .timer {
+            font-size: 2.5em;
+            color: #ff0;
+            margin: 20px;
+        }
+        .crypto {
+            background: #222;
+            padding: 15px;
+            margin: 20px auto;
+            width: 80%;
+            border: 2px dashed #0f0;
+        }
+        button {
+            background: #f00;
+            color: #fff;
+            padding: 15px 40px;
+            font-size: 1.8em;
+            border: none;
+            cursor: pointer;
+            margin: 20px;
+        }
+        button:hover { background: #900; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="skull">💀☠️ HACKED ☠️💀</div>
+        <h1>VOUS AVEZ ÉTÉ HACKÉ PAR CAMZZZ RANSOMWARE</h1>
+    </div>
+
+    <div class="fsociety">F SOCIETY</div>
+
+    <div class="files">
+        <div class="scroll">
+            document_confidentiel.doc [ENCRYPTED] &nbsp;&nbsp; photo_vacances.jpg [ENCRYPTED] &nbsp;&nbsp; 
+            banque.pdf [ENCRYPTED] &nbsp;&nbsp; video_famille.mp4 [ENCRYPTED] &nbsp;&nbsp; 
+            projet_secret.zip [ENCRYPTED] &nbsp;&nbsp; password.txt [ENCRYPTED] &nbsp;&nbsp;
+            document_confidentiel.doc [ENCRYPTED] &nbsp;&nbsp; ... (boucle infinie)
+        </div>
+    </div>
+
+    <p style="color:#f00; font-size:2em;">Tous vos fichiers sont chiffrés avec un algorithme militaire.<br>
+    Vous ne les récupérerez qu'après paiement.</p>
+
+    <div class="timer" id="timer">48:00:00</div>
+
+    <div class="crypto">
+        <p>Envoyez exactement 0.035 BTC à cette adresse :</p>
+        <p style="color:#0f0; font-size:1.6em; word-break:break-all;">bc1qfakeprankaddresscamzzz1234567890xyz</p>
+        <p>(Ceci est une fausse adresse pour le prank - ne rien envoyer !)</p>
+    </div>
+
+    <button onclick="fakePay()">PAYER MAINTENANT ET DÉCHIFFRER</button>
+
+    <script>
+        // Timer 48 heures
+        let time = 48 * 3600;
+        function updateTimer() {
+            let h = Math.floor(time / 3600);
+            let m = Math.floor((time % 3600) / 60);
+            let s = time % 60;
+            document.getElementById('timer').textContent = 
+                `\( {h.toString().padStart(2,'0')}: \){m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            if (time > 0) time--;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        function fakePay() {
+            alert("😂 PRANK ! C'était une blague de CAMZZZ. Tes fichiers sont en sécurité... pour l'instant. F Society t'observe.");
+        }
+
+        // Glitch supplémentaire sur le body
+        setInterval(() => {
+            document.body.style.filter = "invert(1)";
+            setTimeout(() => document.body.style.filter = "none", 80);
+        }, 3000);
+    </script>
+</body>
+</html>
