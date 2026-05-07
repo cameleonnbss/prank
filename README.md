@@ -1,2 +1,2 @@
 # prank
-.bat
+all my differents pranks
