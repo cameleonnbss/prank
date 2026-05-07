@@ -1,39 +1,211 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚠️ YOUR FILES HAVE BEEN ENCRYPTED ⚠️</title>
+    <title>CRITICAL SYSTEM FAILURE</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=VT323&display=swap');
+
         body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier Prime', monospace;
             margin: 0;
             padding: 0;
-            background: #000;
-            color: #0f0;
-            font-family: 'VT323', monospace;
             overflow: hidden;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            cursor: crosshair;
         }
-        .header {
-            background: #300;
+
+        /* Effet de scanlines (vieil écran) */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 10;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .mask-container {
+            width: 250px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px #ffffff44);
+            animation: flicker 0.1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.9; }
+            100% { opacity: 1; transform: skew(0.5deg); }
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin: 10px 0;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .warning-box {
+            border: 2px solid #fff;
             padding: 20px;
-            border-bottom: 4px solid #f00;
+            max-width: 800px;
+            background: rgba(20, 20, 20, 0.8);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            position: relative;
         }
-        .skull {
-            font-size: 120px;
-            animation: glitch 1s infinite;
+
+        .status-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 10px;
         }
-        @keyframes glitch {
-            0% { text-shadow: 2px 0 #f00, -2px 0 #0f0; }
-            50% { text-shadow: -2px 0 #f00, 2px 0 #0f0; }
-            100% { text-shadow: 2px 0 #f00, -2px 0 #0f0; }
+
+        .file-scroller {
+            height: 120px;
+            overflow: hidden;
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: #aaa;
+            text-align: left;
+            margin: 15px 0;
+            border: 1px solid #333;
+            padding: 5px;
+            background: #050505;
         }
-        h1 { color: #f00; font-size: 3em; margin: 10px; text-shadow: 0 0 10px #f00; }
-        .fsociety {
-            font-size: 4em;
-            color: #00f;
-            text-shadow: 0 0 20px #00f;
+
+        .file-line {
+            line-height: 1.2;
+            animation: slideUp 8s linear infinite;
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
+        .timer-container {
+            margin: 20px 0;
+        }
+
+        #timer {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+            background: #1a1a1a;
+            padding: 10px 30px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .address-box {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .btc-address {
+            color: #fff;
+            font-weight: bold;
+            background: #222;
+            padding: 8px;
+            margin-top: 5px;
+            display: block;
+            border: 1px dashed #555;
+        }
+
+        .signature {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 10px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="mask-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Fsociety_logo.svg/1024px-Fsociety_logo.svg.png" alt="F-Society" width="100%">
+    </div>
+
+    <div class="warning-box">
+        <div class="status-header">⚠️ YOUR FILES HAVE BEEN ENCRYPTED ⚠️</div>
+        
+        <p>All your documents, photos, databases and other important files have been encrypted using military-grade RSA-4096 algorithm. Do NOT try to restart your PC or close this window, as it will lead to permanent data loss.</p>
+
+        <div class="file-scroller">
+            <div class="file-line" id="fileList">
+                </div>
+        </div>
+
+        <div class="timer-container">
+            <div>TIME REMAINING UNTIL PRIVATE KEY DESTRUCTION:</div>
+            <div id="timer">24:00:00</div>
+        </div>
+
+        <div class="address-box">
+            Send 0.124 BTC to the following address to receive your decryption key:
+            <span class="btc-address">bc1qcamzzzprankaddr6k9shm42v8z9k0lptsnqxyz</span>
+        </div>
+    </div>
+
+    <div class="signature">HACKED BY CAMZZZ</div>
+
+    <script>
+        // Génération de la liste de fichiers pour le défilement
+        const files = [
+            "C:/Users/Admin/Documents/passwords.txt... [ENCRYPTED]",
+            "C:/Windows/System32/drivers/etc/hosts... [ENCRYPTED]",
+            "C:/Users/Admin/Photos/Private_Backup.zip... [ENCRYPTED]",
+            "C:/Users/Admin/Work/Budget_2026.xlsx... [ENCRYPTED]",
+            "C:/Users/Admin/Desktop/Confidential.pdf... [ENCRYPTED]",
+            "D:/Backup/Full_Database_Mirror.sql... [ENCRYPTED]",
+            "C:/Users/Admin/Videos/Personal_Media.mp4... [ENCRYPTED]",
+            "C:/Users/Admin/AppData/Roaming/Discord/tokens.db... [ENCRYPTED]",
+            "C:/Users/Admin/Documents/Tax_Return_2025.doc... [ENCRYPTED]"
+        ];
+
+        const fileListElement = document.getElementById('fileList');
+        // On double la liste pour un effet de boucle fluide
+        fileListElement.innerHTML = files.concat(files).map(f => `<div>${f}</div>`).join('');
+
+        // Logique du Timer 24h
+        let seconds = 24 * 60 * 60;
+        const timerDisplay = document.getElementById('timer');
+
+        function updateTimer() {
+            let h = Math.floor(seconds / 3600);
+            let m = Math.floor((seconds % 3600) / 60);
+            let s = seconds % 60;
+
+            timerDisplay.textContent = 
+                `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            
+            if (seconds > 0) seconds--;
+        }
+
+        setInterval(updateTimer, 1000);
+
+        // Effet de glitch sonore ou visuel au clic (optionnel)
+        document.body.onclick = () => {
+            document.body.style.backgroundColor = "#111";
+            setTimeout(() => document.body.style.backgroundColor = "#000", 50);
+        };
+    </script>
+</body>
+</html>
             margin: 20px;
             animation: fs 2s infinite alternate;
         }
