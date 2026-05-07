@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAMS // SYSTEM ENCRYPTED</title>
+<title>CAMS // VOID TERMINAL</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
@@ -14,331 +14,184 @@
     box-sizing: border-box;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+body {
     background: #000;
     color: #fff;
     font-family: 'Share Tech Mono', monospace;
-}
-
-body {
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 
-/* CRT EFFECT */
+/* CRT effect */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background:
-        linear-gradient(rgba(255,255,255,0.03) 50%, rgba(0,0,0,0.2) 50%),
-        linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    background: linear-gradient(rgba(255,255,255,0.03) 50%, rgba(0,0,0,0.2) 50%),
+                linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
     background-size: 100% 4px, 3px 100%;
     pointer-events: none;
-    z-index: 50;
 }
 
 .container {
-    width: 92%;
-    max-width: 1150px;
-    height: 90vh;
-    background: rgba(8,8,8,0.96);
-    border: 1px solid #2a2a2a;
-    box-shadow: 0 0 40px rgba(255,255,255,0.06);
+    width: 90%;
+    max-width: 1100px;
+    height: 85vh;
+    border: 1px solid #222;
     display: grid;
-    grid-template-columns: 320px 1fr;
-    overflow: hidden;
-    position: relative;
+    grid-template-columns: 300px 1fr;
+    background: rgba(10,10,10,0.95);
 }
 
+/* SIDEBAR */
 .sidebar {
-    border-right: 1px solid #1d1d1d;
-    background: linear-gradient(to bottom, #050505, #0d0d0d);
+    border-right: 1px solid #222;
     padding: 30px;
-}
-
-.logo {
-    width: 180px;
-    display: block;
-    margin: auto;
-    filter: grayscale(1) brightness(1.1) contrast(1.1);
-    animation: flicker 0.15s infinite alternate;
-}
-
-@keyframes flicker {
-    from { opacity: 0.92; }
-    to { opacity: 1; }
+    text-align: center;
 }
 
 .brand {
-    text-align: center;
-    margin-top: 20px;
     font-size: 42px;
     letter-spacing: 10px;
-    font-family: 'VT323', monospace;
+    margin-top: 20px;
 }
 
-.brand-sub {
-    text-align: center;
-    color: #666;
-    margin-top: 5px;
-    font-size: 12px;
-    letter-spacing: 3px;
-}
-
-.status-box {
-    margin-top: 40px;
-    border: 1px solid #1f1f1f;
-    padding: 18px;
-    background: #090909;
-}
-
-.status-line {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    font-size: 13px;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #fff;
-    margin-top: 5px;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 0.3; }
-    50% { opacity: 1; }
-    100% { opacity: 0.3; }
-}
-
-.main {
-    padding: 40px;
-    position: relative;
-}
-
-.warning-title {
-    font-size: 52px;
-    line-height: 1;
-    letter-spacing: 4px;
-    font-family: 'VT323', monospace;
-}
-
-.warning-sub {
+.sub {
     color: #777;
-    margin-top: 15px;
-    max-width: 700px;
-    line-height: 1.7;
-    font-size: 15px;
-}
-
-.timer-box {
-    margin-top: 35px;
-    background: #0d0d0d;
-    border: 1px solid #1d1d1d;
-    padding: 25px;
-}
-
-.timer-label {
-    color: #666;
-    letter-spacing: 3px;
     font-size: 12px;
+    margin-top: 5px;
+}
+
+/* SVG LOGO F-SOCIETY (no image file needed) */
+.logo {
+    margin: auto;
+    width: 140px;
+    margin-top: 20px;
+}
+
+.status {
+    margin-top: 40px;
+    text-align: left;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.status div {
     margin-bottom: 10px;
 }
 
-#timer {
-    font-size: 76px;
-    font-family: 'VT323', monospace;
+/* MAIN */
+.main {
+    padding: 40px;
+}
+
+.title {
+    font-size: 48px;
+    letter-spacing: 3px;
+}
+
+.subtitle {
+    margin-top: 15px;
+    color: #777;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* TIMER */
+.timer {
+    margin-top: 30px;
+    font-size: 64px;
     letter-spacing: 6px;
 }
 
+/* TERMINAL */
 .terminal {
     margin-top: 30px;
+    height: 260px;
+    border: 1px solid #222;
     background: #050505;
-    border: 1px solid #1f1f1f;
-    height: 300px;
+    padding: 15px;
     overflow: hidden;
-    padding: 18px;
-    position: relative;
-}
-
-.terminal-header {
-    color: #666;
-    margin-bottom: 15px;
-    font-size: 13px;
-    letter-spacing: 2px;
+    font-size: 14px;
 }
 
 .line {
-    font-size: 14px;
-    color: #cfcfcf;
-    margin-bottom: 6px;
     opacity: 0;
-    animation: fadeIn 0.4s forwards;
+    animation: fade 0.3s forwards;
 }
 
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
-}
-
-.payment-box {
-    margin-top: 30px;
-    border: 1px dashed #333;
-    padding: 20px;
-    background: #090909;
-}
-
-.payment-title {
-    color: #888;
-    margin-bottom: 10px;
-    font-size: 13px;
-    letter-spacing: 2px;
-}
-
-.btc {
-    font-size: 16px;
-    word-break: break-all;
-    color: #fff;
+@keyframes fade {
+    to { opacity: 1; }
 }
 
 .footer {
     position: absolute;
-    bottom: 25px;
+    bottom: 20px;
     right: 40px;
-    color: #444;
+    color: #333;
     letter-spacing: 10px;
-    font-size: 14px;
 }
 
-.glitch {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    mix-blend-mode: screen;
-    opacity: 0.03;
-    background: repeating-linear-gradient(
-        0deg,
-        #fff,
-        #fff 1px,
-        transparent 1px,
-        transparent 3px
-    );
+/* SVG F-SOCIETY STYLE */
+svg {
+    filter: invert(1);
 }
-
 </style>
 </head>
-<body>
 
-<div class="glitch"></div>
+<body>
 
 <div class="container">
 
     <div class="sidebar">
-        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Fsociety_logo.svg/1024px-Fsociety_logo.svg.png">
 
-        <div class="brand">CAMS</div>
-        <div class="brand-sub">VOID TERMINAL</div>
-
-        <div class="status-box">
-            <div class="status-line">
-                <span>NETWORK ACCESS</span>
-                <div class="status-dot"></div>
-            </div>
-
-            <div class="status-line">
-                <span>FILE ACCESS</span>
-                <div class="status-dot"></div>
-            </div>
-
-            <div class="status-line">
-                <span>BACKUP CONTROL</span>
-                <div class="status-dot"></div>
-            </div>
-
-            <div class="status-line">
-                <span>REMOTE SESSION</span>
-                <div class="status-dot"></div>
-            </div>
+        <!-- SVG F-SOCIETY LOGO (no external image) -->
+        <div class="logo">
+            <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="black"/>
+                <circle cx="50" cy="40" r="12" fill="white"/>
+                <path d="M30 75 Q50 55 70 75" stroke="white" stroke-width="2" fill="none"/>
+            </svg>
         </div>
+
+        <div class="brand">CAMZZZ</div>
+        <div class="sub">VOID SYSTEM INTERFACE</div>
+
+        <div class="status">
+            <div>● SYSTEM LINK</div>
+            <div>● VISUAL CORE</div>
+            <div>● TERMINAL ACTIVE</div>
+            <div>● SIMULATION MODE</div>
+        </div>
+
     </div>
 
     <div class="main">
 
-        <div class="warning-title">
-            SYSTEM<br>ACCESS BREACH DETECTED
+        <div class="title">SYSTEM BREACH</div>
+
+        <div class="subtitle">
+            A simulated environment is running diagnostic visualization.
+            No real system modification is occurring.
         </div>
 
-        <div class="warning-sub">
-            Unauthorized activity has been detected across multiple system directories. Visual diagnostics are running in simulation mode for cinematic interface rendering.
-        </div>
+        <div class="timer" id="timer">24:00:00</div>
 
-        <div class="timer-box">
-            <div class="timer-label">SYSTEM SESSION TIMER</div>
-            <div id="timer">24:00:00</div>
-        </div>
-
-        <div class="terminal" id="terminal">
-            <div class="terminal-header">LIVE SYSTEM ACTIVITY</div>
-        </div>
-
-        <div class="payment-box">
-            <div class="payment-title">NETWORK SIGNATURE</div>
-            <div class="btc">CAMZZZZ // VOID-NET // ACCESS NODE</div>
-        </div>
-
-        <div class="footer">SIGNED BY CAMZZZZ</div>
+        <div class="terminal" id="terminal"></div>
 
     </div>
 
 </div>
 
+<div class="footer">CAMZZZ // VOID INTERFACE</div>
+
 <script>
-const terminal = document.getElementById('terminal');
 
-const files = [
-    'C:/Users/Admin/Documents/Tax_Return_2025.pdf',
-    'C:/Users/Admin/Desktop/Passwords.txt',
-    'C:/Users/Admin/Pictures/Private_Backup.zip',
-    'C:/Windows/System32/drivers/etc/hosts',
-    'D:/Projects/Source/database.sql',
-    'C:/Users/Admin/AppData/Roaming/Wallet/wallet.dat',
-    'C:/Users/Admin/Documents/Contracts/final.docx',
-    'D:/Media/Family/video_archive.mp4',
-    'C:/Users/Admin/Work/Budget_2026.xlsx',
-    'C:/Users/Admin/Cloud/backup.iso'
-];
-
-function addLine() {
-    const div = document.createElement('div');
-    div.className = 'line';
-
-    const file = files[Math.floor(Math.random() * files.length)];
-
-    div.textContent = '[SCANNED] ' + file;
-
-    terminal.appendChild(div);
-
-    if (terminal.children.length > 18) {
-        terminal.removeChild(terminal.children[1]);
-    }
-
-    terminal.scrollTop = terminal.scrollHeight;
-}
-
-setInterval(addLine, 180);
-
-let seconds = 24 * 60 * 60;
-const timer = document.getElementById('timer');
+let seconds = 24 * 3600;
+const timer = document.getElementById("timer");
 
 function updateTimer() {
     let h = Math.floor(seconds / 3600);
@@ -354,15 +207,31 @@ function updateTimer() {
 }
 
 setInterval(updateTimer, 1000);
-updateTimer();
 
-setInterval(() => {
-    document.body.style.filter = 'brightness(1.05)';
+const terminal = document.getElementById("terminal");
 
-    setTimeout(() => {
-        document.body.style.filter = 'brightness(1)';
-    }, 60);
-}, 4000);
+const logs = [
+    "scanning memory sectors...",
+    "render pipeline active...",
+    "node synchronization complete...",
+    "visual layer injected...",
+    "system integrity: unstable...",
+    "simulation running in sandbox mode...",
+    "UI core loaded...",
+];
+
+function addLine() {
+    const div = document.createElement("div");
+    div.className = "line";
+    div.textContent = logs[Math.floor(Math.random()*logs.length)];
+    terminal.appendChild(div);
+
+    if (terminal.children.length > 15) {
+        terminal.removeChild(terminal.firstChild);
+    }
+}
+
+setInterval(addLine, 200);
 
 </script>
 
